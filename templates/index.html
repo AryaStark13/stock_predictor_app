@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    {% if predictions %}
+    {% if not predictions.empty %}
 
     Stock Ticker: {{stock_ticker}} <br><br>
     Next 7 days predictions: {{predictions}} <hr> 

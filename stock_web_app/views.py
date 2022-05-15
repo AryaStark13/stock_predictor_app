@@ -24,6 +24,8 @@ def predict(request):
 
         x_future = np.array(df.Close[-7:])
 
+        x_future = np.reshape(x_future, (-1, 1))
+
         scaler = MinMaxScaler(feature_range=(0, 1))
 
         x_future = scaler.fit_transform(x_future)
@@ -43,7 +45,7 @@ def predict(request):
             x_future[-1] = p
         
         y_future = np.array(y_future)
-        y_future = np.reshape(y_future, (7))
+        y_future = np.reshape(y_future, (-1, 1))
 
         y_future = scaler.inverse_transform(y_future)
 
@@ -53,6 +55,8 @@ def predict(request):
         last7.reset_index(drop=True, inplace=True)
         y_future = pd.DataFrame(y_future, columns=['Close'])
         predictions = pd.concat([last7, y_future], ignore_index=True)
+
+        print(predictions.head(10))
 
         return render(request, 'index.html', {'predictions': predictions, 
                                             'stock_ticker': stock_ticker})
