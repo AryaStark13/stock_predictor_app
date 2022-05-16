@@ -8,11 +8,13 @@
 </head>
 <body>
 
-    {% if not predictions.empty %}
+    {% if predictions.empty == False %}
 
     Stock Ticker: {{stock_ticker}} <br><br>
-    Next 7 days predictions: {{predictions}} <hr> 
+    Next 7 days predictions: {{predictions}} <br><br>
 
+    <img src="C:\Users\ariha\Desktop\Django\django_stock_predictor\stock_predictor_app\stock_web_app\next day plot.png" alt="Next day stock price!">
+    <br><br><hr>
     {% endif %}
     <form action="" method="post">
         {% csrf_token %}

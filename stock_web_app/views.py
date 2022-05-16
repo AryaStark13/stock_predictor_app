@@ -57,6 +57,13 @@ def predict(request):
         predictions = pd.concat([last7, y_future], ignore_index=True)
 
         print(predictions.head(10))
+        plt.figure(figsize=(12, 6))
+        plt.plot(predictions[:7], '-', label='Past 7 Days True Values')
+        plt.plot(predictions[6:8], ':')
+        plt.plot(predictions[7:8], 'o', label='Next Day Predicted Value')
+        plt.legend(fontsize=12)
+        plt.show()
+        plt.savefig('Next Day Price.jpg')
 
         return render(request, 'index.html', {'predictions': predictions, 
                                             'stock_ticker': stock_ticker})
@@ -65,11 +72,3 @@ def predict(request):
 
 
 
-
-    # plt.figure(figsize=(12, 6))
-    # plt.plot(predictions[:7], '-', label='Past 7 Days True Values')
-    # plt.plot(predictions[6:8], ':')
-    # plt.plot(predictions[7:8], 'o', label='Next Day Predicted Value')
-    # plt.legend(fontsize=12)
-    # plt.show()
-    # plt.savefig('Next Day Price.jpg')
